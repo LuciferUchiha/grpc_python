@@ -1,0 +1,14 @@
+services:
+  greeter_server:
+    build: ./greeter_server
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./grpc_compiled/:/app/grpc_compiled/
+
+  greeter_client:
+    build: ./greeter_client
+    depends_on:
+      - greeter_server
+    volumes:
+      - ./grpc_compiled/:/app/grpc_compiled/
