@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from grpc_compiled import greeter_pb2 as grpc__protos_dot_greeter__pb2
+from grpc_compiled import greeter_pb2 as greeter__pb2
 
 
 class GreeterStub(object):
@@ -16,8 +16,8 @@ class GreeterStub(object):
         """
         self.SayHello = channel.unary_unary(
                 '/Greeter/SayHello',
-                request_serializer=grpc__protos_dot_greeter__pb2.HelloRequest.SerializeToString,
-                response_deserializer=grpc__protos_dot_greeter__pb2.HelloResponse.FromString,
+                request_serializer=greeter__pb2.HelloRequest.SerializeToString,
+                response_deserializer=greeter__pb2.HelloResponse.FromString,
                 )
 
 
@@ -35,8 +35,8 @@ def add_GreeterServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'SayHello': grpc.unary_unary_rpc_method_handler(
                     servicer.SayHello,
-                    request_deserializer=grpc__protos_dot_greeter__pb2.HelloRequest.FromString,
-                    response_serializer=grpc__protos_dot_greeter__pb2.HelloResponse.SerializeToString,
+                    request_deserializer=greeter__pb2.HelloRequest.FromString,
+                    response_serializer=greeter__pb2.HelloResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -60,7 +60,7 @@ class Greeter(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Greeter/SayHello',
-            grpc__protos_dot_greeter__pb2.HelloRequest.SerializeToString,
-            grpc__protos_dot_greeter__pb2.HelloResponse.FromString,
+            greeter__pb2.HelloRequest.SerializeToString,
+            greeter__pb2.HelloResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
